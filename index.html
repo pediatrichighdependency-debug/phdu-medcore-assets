@@ -14,19 +14,13 @@
 
 
     <!-- ==================================================
-         PHDU MEDCORE
-         IOS HOME SCREEN ICON
+         HOME SCREEN ICON
     =================================================== -->
 
     <link
         rel="apple-touch-icon"
         href="PHDU-MedCore-Home-Screen-Icon.png"
     >
-
-
-    <!-- ==================================================
-         STANDARD ICON
-    =================================================== -->
 
     <link
         rel="icon"
@@ -36,7 +30,7 @@
 
 
     <!-- ==================================================
-         IOS WEB APP SETTINGS
+         IOS WEB APP
     =================================================== -->
 
     <meta
@@ -56,7 +50,8 @@
 
 
     <!-- ==================================================
-         LIGHTWEIGHT REDIRECT SCREEN
+         ULTRA-LIGHT LAUNCH SCREEN
+         NO IMAGE DOWNLOAD
     =================================================== -->
 
     <style>
@@ -65,7 +60,6 @@
         body {
 
             margin: 0;
-            padding: 0;
 
             width: 100%;
             height: 100%;
@@ -82,15 +76,40 @@
             align-items: center;
             justify-content: center;
 
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
         }
 
 
-        #launchIcon {
+        #launchText {
 
-            width: 170px;
-            height: 170px;
+            color: #FFFFFF;
 
-            object-fit: contain;
+            font-size: 34px;
+
+            font-weight: 900;
+
+            text-align: center;
+
+            letter-spacing: 0.3px;
+
+        }
+
+
+        #launchStatus {
+
+            margin-top: 12px;
+
+            color: #8EDFFF;
+
+            font-size: 20px;
+
+            font-weight: 700;
+
+            text-align: center;
 
         }
 
@@ -101,28 +120,28 @@
 
 <body>
 
-    <img
-        id="launchIcon"
-        src="PHDU-MedCore-Home-Screen-Icon.png"
-        alt="PHDU MedCore"
-        draggable="false"
-    >
+
+    <div>
+
+        <div id="launchText">
+            PHDU MedCore
+        </div>
+
+        <div id="launchStatus">
+            Opening…
+        </div>
+
+    </div>
 
 
     <script>
 
-        window.setTimeout(
-            function () {
-
-                window.location.replace(
-                    "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec"
-                );
-
-            },
-            150
+        window.location.replace(
+            "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec"
         );
 
     </script>
+
 
 </body>
 
