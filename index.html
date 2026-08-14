@@ -50,19 +50,24 @@
 
 
     <!-- ==================================================
-         ULTRA-LIGHT LAUNCH SCREEN
-         NO IMAGE DOWNLOAD
+         LIGHTWEIGHT LAUNCHER
     =================================================== -->
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
 
         html,
         body {
 
             margin: 0;
+            padding: 0;
 
             width: 100%;
-            height: 100%;
+            min-height: 100%;
 
             background: #031826;
 
@@ -71,10 +76,17 @@
 
         body {
 
+            min-height: 100vh;
+
             display: flex;
 
             align-items: center;
             justify-content: center;
+
+            padding:
+                calc(28px + env(safe-area-inset-top))
+                22px
+                calc(28px + env(safe-area-inset-bottom));
 
             font-family:
                 Arial,
@@ -84,32 +96,156 @@
         }
 
 
-        #launchText {
+        #launcher {
 
-            color: #FFFFFF;
+            width: 100%;
 
-            font-size: 34px;
-
-            font-weight: 900;
+            max-width: 520px;
 
             text-align: center;
-
-            letter-spacing: 0.3px;
 
         }
 
 
-        #launchStatus {
+        #appIcon {
 
-            margin-top: 12px;
+            display: block;
 
-            color: #8EDFFF;
+            width: 220px;
+            height: 220px;
 
-            font-size: 20px;
+            margin:
+                0 auto
+                26px;
+
+            border-radius: 42px;
+
+            object-fit: contain;
+
+        }
+
+
+        #title {
+
+            margin: 0;
+
+            color: #FFFFFF;
+
+            font-size: 42px;
+
+            font-weight: 900;
+
+            line-height: 1.1;
+
+        }
+
+
+        #subtitle {
+
+            margin:
+                14px 0
+                32px;
+
+            color: #BFEAFF;
+
+            font-size: 22px;
 
             font-weight: 700;
 
-            text-align: center;
+            line-height: 1.4;
+
+        }
+
+
+        #openMedCoreButton {
+
+            width: 100%;
+
+            min-height: 86px;
+
+            padding:
+                18px
+                24px;
+
+            border: 0;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #62E4FF 0%,
+                    #1CB6E8 100%
+                );
+
+            color: #04243A;
+
+            font-size: 28px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            -webkit-tap-highlight-color: transparent;
+
+            touch-action: manipulation;
+
+        }
+
+
+        #openMedCoreButton:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        #installHint {
+
+            margin-top: 28px;
+
+            color: #A7C9D9;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            #appIcon {
+
+                width: 200px;
+                height: 200px;
+
+            }
+
+
+            #title {
+
+                font-size: 38px;
+
+            }
+
+
+            #subtitle {
+
+                font-size: 21px;
+
+            }
+
+
+            #openMedCoreButton {
+
+                min-height: 82px;
+
+                font-size: 26px;
+
+            }
 
         }
 
@@ -121,24 +257,52 @@
 <body>
 
 
-    <div>
+    <main id="launcher">
 
-        <div id="launchText">
+
+        <img
+            id="appIcon"
+            src="PHDU-MedCore-Home-Screen-Icon.png"
+            alt="PHDU MedCore"
+            draggable="false"
+        >
+
+
+        <h1 id="title">
             PHDU MedCore
+        </h1>
+
+
+        <div id="subtitle">
+            Pediatric Medication & Clinical Reference
         </div>
 
-        <div id="launchStatus">
-            Opening…
+
+        <button
+            id="openMedCoreButton"
+            type="button"
+            onclick="openPHDUmedCore()"
+        >
+            OPEN PHDU MEDCORE
+        </button>
+
+
+        <div id="installHint">
+            Add this page to your Home Screen for quick access.
         </div>
 
-    </div>
+
+    </main>
 
 
     <script>
 
-        window.location.replace(
-            "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec"
-        );
+        function openPHDUmedCore() {
+
+            window.location.href =
+                "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec";
+
+        }
 
     </script>
 
