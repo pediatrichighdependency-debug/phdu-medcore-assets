@@ -12,20 +12,33 @@
 
     <title>PHDU MedCore</title>
 
-    <!-- iOS Home Screen Icon -->
+
+    <!-- ==================================================
+         PHDU MEDCORE
+         IOS HOME SCREEN ICON
+    =================================================== -->
+
     <link
         rel="apple-touch-icon"
         href="PHDU-MedCore-Home-Screen-Icon.png"
     >
 
-    <!-- Standard Favicon -->
+
+    <!-- ==================================================
+         STANDARD ICON
+    =================================================== -->
+
     <link
         rel="icon"
         type="image/png"
         href="PHDU-MedCore-Home-Screen-Icon.png"
     >
 
-    <!-- iOS Web App -->
+
+    <!-- ==================================================
+         IOS WEB APP SETTINGS
+    =================================================== -->
+
     <meta
         name="apple-mobile-web-app-capable"
         content="yes"
@@ -41,7 +54,17 @@
         content="black-translucent"
     >
 
+
+    <!-- ==================================================
+         LIGHTWEIGHT LAUNCHER STYLE
+    =================================================== -->
+
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
 
         html,
         body {
@@ -50,9 +73,191 @@
             padding: 0;
 
             width: 100%;
-            height: 100%;
+            min-height: 100%;
 
             background: #031826;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                calc(30px + env(safe-area-inset-top))
+                24px
+                calc(30px + env(safe-area-inset-bottom));
+
+        }
+
+
+        #launcher {
+
+            width: 100%;
+
+            max-width: 520px;
+
+            text-align: center;
+
+        }
+
+
+        #appIcon {
+
+            display: block;
+
+            width: 220px;
+            height: 220px;
+
+            margin:
+                0 auto
+                26px;
+
+            border-radius: 42px;
+
+            object-fit: cover;
+
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.42);
+
+        }
+
+
+        #title {
+
+            margin: 0;
+
+            color: #FFFFFF;
+
+            font-size: 42px;
+
+            font-weight: 900;
+
+            line-height: 1.1;
+
+        }
+
+
+        #subtitle {
+
+            margin:
+                12px 0
+                32px;
+
+            color: #BFEAFF;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            line-height: 1.4;
+
+        }
+
+
+        #openMedCoreButton {
+
+            width: 100%;
+
+            min-height: 86px;
+
+            padding:
+                18px
+                24px;
+
+            border: 0;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #62E4FF 0%,
+                    #1CB6E8 100%
+                );
+
+            color: #04243A;
+
+            font-size: 28px;
+
+            font-weight: 900;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 14px 30px rgba(0, 0, 0, 0.30);
+
+            -webkit-tap-highlight-color: transparent;
+
+            touch-action: manipulation;
+
+        }
+
+
+        #openMedCoreButton:active {
+
+            transform: scale(0.98);
+
+        }
+
+
+        #installHint {
+
+            margin-top: 28px;
+
+            color: #A7C9D9;
+
+            font-size: 18px;
+
+            font-weight: 600;
+
+            line-height: 1.5;
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            #appIcon {
+
+                width: 200px;
+                height: 200px;
+
+            }
+
+
+            #title {
+
+                font-size: 38px;
+
+            }
+
+
+            #subtitle {
+
+                font-size: 21px;
+
+            }
+
+
+            #openMedCoreButton {
+
+                min-height: 82px;
+
+                font-size: 26px;
+
+            }
 
         }
 
@@ -63,12 +268,56 @@
 
 <body>
 
+
+    <main id="launcher">
+
+
+        <img
+            id="appIcon"
+            src="PHDU-MedCore-Home-Screen-Icon.png"
+            alt="PHDU MedCore"
+            draggable="false"
+        >
+
+
+        <h1 id="title">
+            PHDU MedCore
+        </h1>
+
+
+        <div id="subtitle">
+            Pediatric Medication & Clinical Reference
+        </div>
+
+
+        <button
+            id="openMedCoreButton"
+            type="button"
+            onclick="openPHDUmedCore()"
+        >
+            OPEN PHDU MEDCORE
+        </button>
+
+
+        <div id="installHint">
+            Add this page to your Home Screen for quick access.
+        </div>
+
+
+    </main>
+
+
     <script>
 
-       window.location.replace(
-    "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec"
-);
+        function openPHDUmedCore() {
+
+            window.location.href =
+                "https://script.google.com/macros/s/AKfycbwuK9TNt3GQ2D62WbjMTG7I7gPedtwd-IpNCrpvMfOO45TAq8IxwC-iHmRwssoZnjyJ/exec";
+
+        }
+
     </script>
+
 
 </body>
 
