@@ -400,6 +400,39 @@
 
     <script>
 
+        /* ==================================================
+           HIDE INSTALL MESSAGE WHEN OPENED
+           FROM HOME SCREEN / STANDALONE MODE
+        =================================================== */
+
+        const isInstalled =
+            window.navigator.standalone === true ||
+            window.matchMedia(
+                "(display-mode: standalone)"
+            ).matches;
+
+
+        if (isInstalled) {
+
+            const installHint =
+                document.getElementById(
+                    "installHint"
+                );
+
+            if (installHint) {
+
+                installHint.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* ==================================================
+           OPEN PHDU MEDCORE
+        =================================================== */
+
         function openPHDUmedCore() {
 
             window.location.href =
