@@ -141,6 +141,167 @@
         }
 
 
+        /* ==================================================
+           LIGHTWEIGHT MEDICATION + ECG SIGNATURE
+           Isolated splash enhancement: CSS/SVG + local text.
+        =================================================== */
+
+        #medcoreSignal {
+
+            width: min(100%, 390px);
+
+            margin:
+                0 auto
+                22px;
+
+            text-align: center;
+
+            pointer-events: none;
+
+        }
+
+
+        #signalEyebrow {
+
+            color: #DDBA63;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            line-height: 1.2;
+
+            letter-spacing: 3px;
+
+            text-transform: uppercase;
+
+            opacity: 0.9;
+
+        }
+
+
+        #medicationDisplay {
+
+            min-height: 34px;
+
+            margin-top: 9px;
+
+            color: #FFFFFF;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+            line-height: 1.35;
+
+            letter-spacing: 4px;
+
+            text-transform: uppercase;
+
+            text-shadow:
+                0 0 14px rgba(98, 228, 255, 0.22);
+
+        }
+
+
+        #medicationCursor {
+
+            display: inline-block;
+
+            width: 2px;
+            height: 24px;
+
+            margin-left: 3px;
+
+            background: #62E4FF;
+
+            vertical-align: -4px;
+
+            box-shadow:
+                0 0 8px rgba(98, 228, 255, 0.75);
+
+            animation:
+                medcoreCursorBlink 0.9s steps(1, end) infinite;
+
+        }
+
+
+        #medcoreEcg {
+
+            display: block;
+
+            width: 100%;
+            height: 54px;
+
+            margin-top: 2px;
+
+            overflow: visible;
+
+        }
+
+
+        .medcoreEcgBase,
+        .medcoreEcgPulse {
+
+            fill: none;
+
+            stroke-linecap: round;
+            stroke-linejoin: round;
+
+        }
+
+
+        .medcoreEcgBase {
+
+            stroke: rgba(42, 177, 255, 0.18);
+
+            stroke-width: 2;
+
+        }
+
+
+        .medcoreEcgPulse {
+
+            stroke: #2AB1FF;
+
+            stroke-width: 3;
+
+            stroke-dasharray: 86 420;
+            stroke-dashoffset: 506;
+
+            filter:
+                drop-shadow(0 0 4px rgba(42, 177, 255, 0.75));
+
+            animation:
+                medcoreEcgTravel 3.2s linear infinite;
+
+        }
+
+
+        @keyframes medcoreCursorBlink {
+
+            0%,
+            48% {
+                opacity: 1;
+            }
+
+            49%,
+            100% {
+                opacity: 0;
+            }
+
+        }
+
+
+        @keyframes medcoreEcgTravel {
+
+            to {
+                stroke-dashoffset: 0;
+            }
+
+        }
+
+
         #appIcon {
 
             display: block;
@@ -304,6 +465,32 @@
 
         @media (max-width: 480px) {
 
+            #medcoreSignal {
+
+                margin-bottom: 18px;
+
+            }
+
+
+            #signalEyebrow {
+
+                font-size: 10px;
+
+                letter-spacing: 2.4px;
+
+            }
+
+
+            #medicationDisplay {
+
+                min-height: 31px;
+
+                font-size: 20px;
+
+                letter-spacing: 3px;
+
+            }
+
             #appIcon {
 
                 width: 200px;
@@ -368,6 +555,33 @@
 
         }
 
+
+        @media (prefers-reduced-motion: reduce) {
+
+            #medicationCursor,
+            .medcoreEcgPulse {
+
+                animation: none;
+
+            }
+
+
+            #medicationCursor {
+
+                opacity: 1;
+
+            }
+
+
+            .medcoreEcgPulse {
+
+                stroke-dasharray: none;
+                stroke-dashoffset: 0;
+
+            }
+
+        }
+
     </style>
 
 </head>
@@ -377,6 +591,38 @@
 
 
     <main id="launcher">
+
+
+        <div
+            id="medcoreSignal"
+            aria-hidden="true"
+        >
+
+            <div id="signalEyebrow">
+                Pediatric Medication Reference
+            </div>
+
+            <div id="medicationDisplay">
+                <span id="medicationName">KETAMINE</span><span id="medicationCursor"></span>
+            </div>
+
+            <svg
+                id="medcoreEcg"
+                viewBox="0 0 390 54"
+                preserveAspectRatio="none"
+                focusable="false"
+            >
+                <path
+                    class="medcoreEcgBase"
+                    d="M2 29 H92 L102 29 L110 17 L120 39 L130 29 H156 L164 24 L174 29 L185 29 L194 5 L208 49 L220 29 H244 L253 19 L263 29 H388"
+                ></path>
+                <path
+                    class="medcoreEcgPulse"
+                    d="M2 29 H92 L102 29 L110 17 L120 39 L130 29 H156 L164 24 L174 29 L185 29 L194 5 L208 49 L220 29 H244 L253 19 L263 29 H388"
+                ></path>
+            </svg>
+
+        </div>
 
 
         <img
@@ -461,6 +707,173 @@
             }
 
         }
+
+
+        /* ==================================================
+           LIGHTWEIGHT MEDICATION NAME ROTATION
+        =================================================== */
+
+        const medcoreMedicationNames = [
+            "KETAMINE",
+            "ADRENALINE",
+            "ADENOSINE",
+            "NALOXONE",
+            "FUROSEMIDE"
+        ];
+
+        const medcoreMedicationName =
+            document.getElementById(
+                "medicationName"
+            );
+
+        const medcoreReducedMotion =
+            window.matchMedia(
+                "(prefers-reduced-motion: reduce)"
+            ).matches;
+
+        let medcoreMedicationIndex = 0;
+        let medcoreCharacterIndex = 0;
+        let medcoreIsDeleting = false;
+        let medcoreAnimationTimer = null;
+
+
+        function scheduleMedcoreMedicationAnimation(
+            delay
+        ) {
+
+            window.clearTimeout(
+                medcoreAnimationTimer
+            );
+
+            medcoreAnimationTimer =
+                window.setTimeout(
+                    animateMedcoreMedicationName,
+                    delay
+                );
+
+        }
+
+
+        function animateMedcoreMedicationName() {
+
+            if (
+                !medcoreMedicationName ||
+                document.hidden ||
+                medcoreReducedMotion
+            ) {
+
+                return;
+
+            }
+
+            const currentMedication =
+                medcoreMedicationNames[
+                    medcoreMedicationIndex
+                ];
+
+            if (!medcoreIsDeleting) {
+
+                medcoreCharacterIndex += 1;
+
+                medcoreMedicationName.textContent =
+                    currentMedication.slice(
+                        0,
+                        medcoreCharacterIndex
+                    );
+
+                if (
+                    medcoreCharacterIndex >=
+                    currentMedication.length
+                ) {
+
+                    medcoreIsDeleting = true;
+
+                    scheduleMedcoreMedicationAnimation(
+                        1350
+                    );
+
+                    return;
+
+                }
+
+                scheduleMedcoreMedicationAnimation(
+                    72
+                );
+
+                return;
+
+            }
+
+            medcoreCharacterIndex -= 1;
+
+            medcoreMedicationName.textContent =
+                currentMedication.slice(
+                    0,
+                    medcoreCharacterIndex
+                );
+
+            if (medcoreCharacterIndex <= 0) {
+
+                medcoreIsDeleting = false;
+
+                medcoreMedicationIndex =
+                    (
+                        medcoreMedicationIndex + 1
+                    ) % medcoreMedicationNames.length;
+
+                scheduleMedcoreMedicationAnimation(
+                    260
+                );
+
+                return;
+
+            }
+
+            scheduleMedcoreMedicationAnimation(
+                38
+            );
+
+        }
+
+
+        if (
+            medcoreMedicationName &&
+            !medcoreReducedMotion
+        ) {
+
+            medcoreMedicationName.textContent = "";
+
+            scheduleMedcoreMedicationAnimation(
+                420
+            );
+
+        }
+
+
+        document.addEventListener(
+            "visibilitychange",
+            function () {
+
+                if (document.hidden) {
+
+                    window.clearTimeout(
+                        medcoreAnimationTimer
+                    );
+
+                    return;
+
+                }
+
+                if (!medcoreReducedMotion) {
+
+                    scheduleMedcoreMedicationAnimation(
+                        240
+                    );
+
+                }
+
+            }
+        );
 
 
         /* ==================================================
